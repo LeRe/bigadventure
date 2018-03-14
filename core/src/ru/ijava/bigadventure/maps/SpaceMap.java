@@ -63,6 +63,6 @@ public class SpaceMap extends Actor implements GameMap {
 
     @Override
     public int getCenterCellY(int indexOnMapPosition) {
-        return 1860;
+        return 145;
     }
 }

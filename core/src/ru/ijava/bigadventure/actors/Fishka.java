@@ -24,7 +24,7 @@ public class Fishka extends Actor {
         this.gameMap = gameMap;
         this.fishkaColor = fishkaColor;
 
-        Pixmap pixmap = new Pixmap(100, 100, Pixmap.Format.RGBA8888 );
+        Pixmap pixmap = new Pixmap(50, 50, Pixmap.Format.RGBA8888 );
 
         switch (this.fishkaColor) {
             case RED :
@@ -40,11 +40,11 @@ public class Fishka extends Actor {
                 pixmap.setColor(1,1,0,1);
                 break;
         }
-        pixmap.fillCircle(50,50, 50);
+        pixmap.fillCircle(25,25, 25);
         texture = new Texture(pixmap);
 
-        setWidth(100);
-        setHeight(100);
+        setWidth(25);
+        setHeight(25);
 
         setPositionOnScreen();
     }
@@ -56,16 +56,16 @@ public class Fishka extends Actor {
 
         switch (fishkaColor) {
             case RED:
-                x -= 200;
+                x -= 110;
                 break;
             case GREEN:
-                x -= 100;
+                x -= 55;
                 break;
             case BLUE:
 
                 break;
             case YELLOW:
-                x += 100;
+                x += 60;
                 break;
         }
 
