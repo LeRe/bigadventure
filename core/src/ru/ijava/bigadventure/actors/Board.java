@@ -12,7 +12,7 @@ import ru.ijava.bigadventure.ifaces.GestureWaiter;
  * Created by rele on 3/9/18.
  */
 
-public class MainStage extends Stage implements GestureWaiter {
+public class Board extends Stage implements GestureWaiter {
 
     private final float MAP_WIDTH;
     private final float MAP_HEIGHT;
@@ -21,7 +21,7 @@ public class MainStage extends Stage implements GestureWaiter {
     private static final float MIN_ZOOM = 0.2f;
     private static final float MAX_ZOOM = 1.5f;
 
-    public MainStage(float mapWidth, float mapHeight) {
+    public Board(float mapWidth, float mapHeight) {
         super(new FillViewport(mapWidth, mapHeight));
 
         MAP_WIDTH = mapWidth;

@@ -12,6 +12,8 @@ public interface GameMap {
     float getMapHeight();
     Actor getMapActor();
 
+    int getMaxPositionIndex();
+
     int getCenterCellX(int indexOnMapPosition);
     int getCenterCellY(int indexOnMapPosition);;
 }

@@ -7,14 +7,16 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+import ru.ijava.bigadventure.ifaces.GameFishka;
 import ru.ijava.bigadventure.ifaces.GameMap;
 
 /**
  * Created by rele on 3/5/18.
  */
 
-public class Fishka extends Actor {
+public class Fishka extends Actor implements GameFishka {
     private Texture texture;
+
     private int indexOnMapPosition;
     private GameMap gameMap;
     private FishkaColor fishkaColor;
@@ -53,24 +55,33 @@ public class Fishka extends Actor {
         int x = gameMap.getCenterCellX(indexOnMapPosition);
         int y = gameMap.getCenterCellY(indexOnMapPosition);
 
+        if (false) { //Пока все встают в центр клетки
+            switch (fishkaColor) {
+                case RED:
+                    x -= 200;
+                    break;
+                case GREEN:
+                    x -= 100;
+                    break;
+                case BLUE:
 
-        switch (fishkaColor) {
-            case RED:
-                x -= 200;
-                break;
-            case GREEN:
-                x -= 100;
-                break;
-            case BLUE:
-
-                break;
-            case YELLOW:
-                x += 100;
-                break;
+                    break;
+                case YELLOW:
+                    x += 100;
+                    break;
+            }
         }
 
         setX(x);
         setY(y);
+    }
+
+    public int getIndexOnMapPosition() {
+        return indexOnMapPosition;
+    }
+
+    public void setIndexOnMapPosition(int indexOnMapPosition) {
+        this.indexOnMapPosition = indexOnMapPosition;
     }
 
     @Override
@@ -78,5 +89,20 @@ public class Fishka extends Actor {
         Color color = getColor();
         batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
         batch.draw(texture, getX(), getY());
+    }
+
+    @Override
+    public void setPosition(int position) {
+        if (position > gameMap.getMaxPositionIndex()) {
+            indexOnMapPosition = 0;
+        }
+        else {
+            indexOnMapPosition = position;
+        }
+    }
+
+    @Override
+    public int getPosition() {
+        return indexOnMapPosition;
     }
 }
