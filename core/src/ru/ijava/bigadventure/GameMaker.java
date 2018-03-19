@@ -13,20 +13,33 @@ public class GameMaker {
     private List<GameFishka> gamerList;
     private GameMap map;
 
+    private int frameCounter = 0;
+
     public GameMaker(GameMap map, List<GameFishka> gamerList) {
         this.map = map;
         this.gamerList = gamerList;
 
-        int position = 0;
-        for (GameFishka fishka: gamerList) {
-            fishka.setPosition(position);
-            position++;
-        }
+//        int position = 0;
+//        for (GameFishka fishka: gamerList) {
+//            fishka.setPosition(position);
+//            position++;
+//        }
+        gamerList.get(0).setPosition(0);
+        gamerList.get(1).setPosition(6);
+        gamerList.get(2).setPosition(83);
+        gamerList.get(3).setPosition(84);
     }
 
     public void act() {
-        for (GameFishka fishka: gamerList) {
-            fishka.setPosition(fishka.getPosition() + 1);
-        }
+        frameCounter++;
+        if (frameCounter < 15) return;
+        frameCounter = 0;
+
+//
+//        for (GameFishka fishka: gamerList) {
+//            fishka.setPosition(fishka.getPosition() + 1);
+//        }
+
+
     }
 }

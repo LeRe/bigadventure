@@ -23,58 +23,97 @@ public class SpaceMap extends Actor implements GameMap {
 
     private List<Cell> cellList;
 
+    private CellForm cellForm = CellForm.RECT;
+    private final int CELL_WIDTH = 290;
+    private final int CELL_HEIGHT = 180;
+
     private TextureRegion region;
 
     public SpaceMap () {
         region = new TextureRegion(new Texture(fileName));
         setX(0);
         setY(0);
-
         setWidth(MAP_WIDTH);
         setHeight(MAP_HEIGHT);
 
-        final int ROW_ONE = 1855;
-        final int COLUMN_ONE = 190;
-        final int ROW_DELTA = 195;
-        final int COLUMN_DELTA = 340;
+
+        final int ROW_ONE = 1858;
+        final int COLUMN_ONE = 192;
+
+        final int ROW_DELTA = 192;
+        final int COLUMN_DELTA = 306;
 
         cellList = new ArrayList<Cell>();
         // line 1
-        cellList.add(0, new Cell(0, COLUMN_ONE + COLUMN_DELTA * 0, MAP_WIDTH - ROW_ONE - ROW_DELTA * 0));
-        cellList.add(1, new Cell(1, COLUMN_ONE + COLUMN_DELTA * 1, MAP_WIDTH - ROW_ONE - ROW_DELTA * 0));
-        cellList.add(2, new Cell(2, COLUMN_ONE + COLUMN_DELTA * 2, MAP_WIDTH - ROW_ONE - ROW_DELTA * 0));
-        cellList.add(3, new Cell(3, COLUMN_ONE + COLUMN_DELTA * 3, MAP_WIDTH - ROW_ONE - ROW_DELTA * 0));
-        cellList.add(4, new Cell(4, COLUMN_ONE + COLUMN_DELTA * 4, MAP_WIDTH - ROW_ONE - ROW_DELTA * 0));
-        cellList.add(5, new Cell(5, COLUMN_ONE + COLUMN_DELTA * 5, MAP_WIDTH - ROW_ONE - ROW_DELTA * 0));
-        cellList.add(6, new Cell(6, COLUMN_ONE + COLUMN_DELTA * 6, MAP_WIDTH - ROW_ONE - ROW_DELTA * 0));
+        int cellIndex = 0;
+        int rowIndex = 0;
+        for (int colIndex = 0; colIndex <= 6; colIndex++) {
+            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex));
+            cellIndex++;
+        }
+        rowIndex++;
 
         // line 2
-        cellList.add(7, new Cell(7, COLUMN_ONE + COLUMN_DELTA * 6, MAP_WIDTH - ROW_ONE - ROW_DELTA * 1));
-        cellList.add(8, new Cell(8, COLUMN_ONE + COLUMN_DELTA * 5, MAP_WIDTH - ROW_ONE - ROW_DELTA * 1));
-        cellList.add(9, new Cell(9, COLUMN_ONE + COLUMN_DELTA * 4, MAP_WIDTH - ROW_ONE - ROW_DELTA * 1));
-        cellList.add(10, new Cell(10, COLUMN_ONE + COLUMN_DELTA * 3, MAP_WIDTH - ROW_ONE - ROW_DELTA * 1));
-        cellList.add(11, new Cell(11, COLUMN_ONE + COLUMN_DELTA * 2, MAP_WIDTH - ROW_ONE - ROW_DELTA * 1));
-        cellList.add(12, new Cell(12, COLUMN_ONE + COLUMN_DELTA * 1, MAP_WIDTH - ROW_ONE - ROW_DELTA * 1));
-        cellList.add(13, new Cell(13, COLUMN_ONE + COLUMN_DELTA * 0, MAP_WIDTH - ROW_ONE - ROW_DELTA * 1));
+        for (int colIndex = 6; colIndex >= 0; colIndex--) {
+            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex));
+            cellIndex++;
+        }
+        rowIndex++;
 
         // line 3
-        cellList.add(14, new Cell(14, COLUMN_ONE + COLUMN_DELTA * 0, MAP_WIDTH - ROW_ONE - ROW_DELTA * 2));
-        cellList.add(15, new Cell(15, COLUMN_ONE + COLUMN_DELTA * 1, MAP_WIDTH - ROW_ONE - ROW_DELTA * 2));
-        cellList.add(16, new Cell(16, COLUMN_ONE + COLUMN_DELTA * 2, MAP_WIDTH - ROW_ONE - ROW_DELTA * 2));
-        cellList.add(17, new Cell(17, COLUMN_ONE + COLUMN_DELTA * 3, MAP_WIDTH - ROW_ONE - ROW_DELTA * 2));
-        cellList.add(18, new Cell(18, COLUMN_ONE + COLUMN_DELTA * 4, MAP_WIDTH - ROW_ONE - ROW_DELTA * 2));
-        cellList.add(19, new Cell(19, COLUMN_ONE + COLUMN_DELTA * 5, MAP_WIDTH - ROW_ONE - ROW_DELTA * 2));
-        cellList.add(20, new Cell(20, COLUMN_ONE + COLUMN_DELTA * 6, MAP_WIDTH - ROW_ONE - ROW_DELTA * 2));
-        cellList.add(21, new Cell(21, COLUMN_ONE + COLUMN_DELTA * 7, MAP_WIDTH - ROW_ONE - ROW_DELTA * 2));
-        cellList.add(22, new Cell(22, COLUMN_ONE + COLUMN_DELTA * 8, MAP_WIDTH - ROW_ONE - ROW_DELTA * 2));
-        cellList.add(23, new Cell(23, COLUMN_ONE + COLUMN_DELTA * 9, MAP_WIDTH - ROW_ONE - ROW_DELTA * 2));
+        for (int colIndex = 0; colIndex <= 9; colIndex++) {
+            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex));
+            cellIndex++;
+        }
+        rowIndex++;
 
         // line 4
-        //cellList.add(24, new Cell(24, COLUMN_ONE + COLUMN_DELTA * 3, MAP_WIDTH - ROW_ONE - ROW_DELTA * 1));
-        //cellList.add(25, new Cell(25, COLUMN_ONE + COLUMN_DELTA * 2, MAP_WIDTH - ROW_ONE - ROW_DELTA * 1));
-        //cellList.add(26, new Cell(26, COLUMN_ONE + COLUMN_DELTA * 1, MAP_WIDTH - ROW_ONE - ROW_DELTA * 1));
-        //cellList.add(27, new Cell(27, COLUMN_ONE + COLUMN_DELTA * 0, MAP_WIDTH - ROW_ONE - ROW_DELTA * 1));
+        for (int colIndex = 9; colIndex >= 0; colIndex--) {
+            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex));
+            cellIndex++;
+        }
+        rowIndex++;
 
+        //line 5
+        for (int colIndex = 0; colIndex <= 9; colIndex++) {
+            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex));
+            cellIndex++;
+        }
+        rowIndex++;
+
+        //line 6
+        for (int colIndex = 9; colIndex >= 0; colIndex--) {
+            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex));
+            cellIndex++;
+        }
+        rowIndex++;
+
+        //line 7
+        for (int colIndex = 0; colIndex <= 9; colIndex++) {
+            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex));
+            cellIndex++;
+        }
+        rowIndex++;
+
+        //line 8
+        for (int colIndex = 9; colIndex >= 0; colIndex--) {
+            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex));
+            cellIndex++;
+        }
+        rowIndex++;
+
+        //line 9
+        for (int colIndex = 0; colIndex <= 9; colIndex++) {
+            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex));
+            cellIndex++;
+        }
+        rowIndex++;
+
+        //line 10
+        for (int colIndex = 9; colIndex >= 0; colIndex--) {
+            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex));
+            cellIndex++;
+        }
     }
 
     @Override

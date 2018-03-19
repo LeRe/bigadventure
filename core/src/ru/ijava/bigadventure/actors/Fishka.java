@@ -17,6 +17,9 @@ import ru.ijava.bigadventure.ifaces.GameMap;
 public class Fishka extends Actor implements GameFishka {
     private Texture texture;
 
+    private final int FISHKA_WIDTH = 290;
+    private final int FISHKA_HEIGHT = 180;
+
     private int indexOnMapPosition;
     private GameMap gameMap;
     private FishkaColor fishkaColor;
@@ -26,7 +29,7 @@ public class Fishka extends Actor implements GameFishka {
         this.gameMap = gameMap;
         this.fishkaColor = fishkaColor;
 
-        Pixmap pixmap = new Pixmap(100, 100, Pixmap.Format.RGBA8888 );
+        Pixmap pixmap = new Pixmap(FISHKA_WIDTH, FISHKA_HEIGHT, Pixmap.Format.RGBA8888 );
 
         switch (this.fishkaColor) {
             case RED :
@@ -42,11 +45,13 @@ public class Fishka extends Actor implements GameFishka {
                 pixmap.setColor(1,1,0,1);
                 break;
         }
-        pixmap.fillCircle(50,50, 50);
+        pixmap.fillCircle(FISHKA_WIDTH / 2,FISHKA_HEIGHT / 2, FISHKA_HEIGHT / 2);
+        pixmap.drawRectangle(0,0, FISHKA_WIDTH, FISHKA_HEIGHT);
+
         texture = new Texture(pixmap);
 
-        setWidth(100);
-        setHeight(100);
+        setWidth(FISHKA_WIDTH);
+        setHeight(FISHKA_HEIGHT);
 
         setPositionOnScreen();
     }
@@ -54,6 +59,9 @@ public class Fishka extends Actor implements GameFishka {
     private void setPositionOnScreen() {
         int x = gameMap.getCenterCellX(indexOnMapPosition);
         int y = gameMap.getCenterCellY(indexOnMapPosition);
+
+        x -= FISHKA_WIDTH / 2;
+        y -= FISHKA_HEIGHT / 2;
 
         if (false) { //Пока все встают в центр клетки
             switch (fishkaColor) {
@@ -99,6 +107,8 @@ public class Fishka extends Actor implements GameFishka {
         else {
             indexOnMapPosition = position;
         }
+
+        setPositionOnScreen();
     }
 
     @Override
