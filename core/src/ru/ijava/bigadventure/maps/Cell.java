@@ -17,7 +17,7 @@ public class Cell {
     private CellForm cellForm;
     private int cellWidth;
     private int cellHeight;
-    private int numberGamers;
+    private int numberGamers = 4;
 
     List<GameFishka> fishkaList;
 
@@ -27,6 +27,9 @@ public class Cell {
         this.centerY = centerY;
 
         fishkaList = new ArrayList<GameFishka>();
+        for (int i = 0; i < numberGamers; i++) {
+            fishkaList.add(null);
+        }
 
     }
 
@@ -48,11 +51,49 @@ public class Cell {
     }
 
     public int getGamerPlaceX(GameFishka gameFishka) {
-
+        int x = 0;
+        if (fishkaList.contains(gameFishka)) {
+            switch (fishkaList.indexOf(gameFishka)) {
+                case 0:
+                    x = getCenterX() - cellWidth / 4;
+                    break;
+                case 1:
+                    x = getCenterX() + cellWidth / 4;
+                    break;
+                case 2:
+                    x = getCenterX() - cellWidth / 4;
+                    break;
+                case 3:
+                    x = getCenterX() + cellWidth / 4;
+                    break;
+                default:
+                  x = getCenterX();
+            }
+        }
+        return x;
     }
 
     public int getGamerPlaceY(GameFishka gameFishka) {
-
+        int y = 0;
+        if (fishkaList.contains(gameFishka)) {
+            switch (fishkaList.indexOf(gameFishka)) {
+                case 0:
+                    y = getCenterY() - cellHeight / 4;
+                    break;
+                case 1:
+                    y = getCenterY() - cellHeight / 4;
+                    break;
+                case 2:
+                    y = getCenterY() + cellHeight / 4;
+                    break;
+                case 3:
+                    y = getCenterY() + cellHeight / 4;
+                    break;
+                default:
+                    y = getCenterY();
+            }
+        }
+        return y;
     }
 
     public int getIndex() {

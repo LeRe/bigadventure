@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import java.util.ArrayList;
 import java.util.List;
 
+import ru.ijava.bigadventure.ifaces.GameFishka;
 import ru.ijava.bigadventure.ifaces.GameMap;
 
 /**
@@ -48,70 +49,70 @@ public class SpaceMap extends Actor implements GameMap {
         int cellIndex = 0;
         int rowIndex = 0;
         for (int colIndex = 0; colIndex <= 6; colIndex++) {
-            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex));
+            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex, CellForm.RECT, CELL_WIDTH, CELL_HEIGHT));
             cellIndex++;
         }
         rowIndex++;
 
         // line 2
         for (int colIndex = 6; colIndex >= 0; colIndex--) {
-            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex));
+            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex, CellForm.RECT, CELL_WIDTH, CELL_HEIGHT));
             cellIndex++;
         }
         rowIndex++;
 
         // line 3
         for (int colIndex = 0; colIndex <= 9; colIndex++) {
-            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex));
+            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex, CellForm.RECT, CELL_WIDTH, CELL_HEIGHT));
             cellIndex++;
         }
         rowIndex++;
 
         // line 4
         for (int colIndex = 9; colIndex >= 0; colIndex--) {
-            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex));
+            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex, CellForm.RECT, CELL_WIDTH, CELL_HEIGHT));
             cellIndex++;
         }
         rowIndex++;
 
         //line 5
         for (int colIndex = 0; colIndex <= 9; colIndex++) {
-            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex));
+            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex, CellForm.RECT, CELL_WIDTH, CELL_HEIGHT));
             cellIndex++;
         }
         rowIndex++;
 
         //line 6
         for (int colIndex = 9; colIndex >= 0; colIndex--) {
-            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex));
+            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex, CellForm.RECT, CELL_WIDTH, CELL_HEIGHT));
             cellIndex++;
         }
         rowIndex++;
 
         //line 7
         for (int colIndex = 0; colIndex <= 9; colIndex++) {
-            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex));
+            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex, CellForm.RECT, CELL_WIDTH, CELL_HEIGHT));
             cellIndex++;
         }
         rowIndex++;
 
         //line 8
         for (int colIndex = 9; colIndex >= 0; colIndex--) {
-            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex));
+            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex, CellForm.RECT, CELL_WIDTH, CELL_HEIGHT));
             cellIndex++;
         }
         rowIndex++;
 
         //line 9
         for (int colIndex = 0; colIndex <= 9; colIndex++) {
-            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex));
+            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex, CellForm.RECT, CELL_WIDTH, CELL_HEIGHT));
             cellIndex++;
         }
         rowIndex++;
 
         //line 10
         for (int colIndex = 9; colIndex >= 0; colIndex--) {
-            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex));
+            cellList.add(cellIndex, new Cell(cellIndex, COLUMN_ONE + COLUMN_DELTA * colIndex, MAP_HEIGHT - ROW_ONE + ROW_DELTA * rowIndex, CellForm.RECT, CELL_WIDTH, CELL_HEIGHT));
             cellIndex++;
         }
     }
@@ -157,5 +158,25 @@ public class SpaceMap extends Actor implements GameMap {
     @Override
     public int getCenterCellY(int indexOnMapPosition) {
         return cellList.get(indexOnMapPosition).getCenterY();
+    }
+
+    @Override
+    public void putGamerToCell(int indexOnMapPosition, GameFishka gameFishka) {
+        cellList.get(indexOnMapPosition).putGamerToCell(gameFishka);
+    }
+
+    @Override
+    public void getGamerFromCell(int indexOnMapPosition, GameFishka gameFishka) {
+        cellList.get(indexOnMapPosition).getGamerFromCell(gameFishka);
+    }
+
+    @Override
+    public int getGamerX(int indexOnMapPosition, GameFishka gameFishka) {
+        return cellList.get(indexOnMapPosition).getGamerPlaceX(gameFishka);
+    }
+
+    @Override
+    public int getGamerY(int indexOnMapPosition, GameFishka gameFishka) {
+        return cellList.get(indexOnMapPosition).getGamerPlaceY(gameFishka);
     }
 }

@@ -15,5 +15,11 @@ public interface GameMap {
     int getMaxPositionIndex();
 
     int getCenterCellX(int indexOnMapPosition);
-    int getCenterCellY(int indexOnMapPosition);;
+    int getCenterCellY(int indexOnMapPosition);
+
+    int getGamerX(int indexOnMapPosition, GameFishka gameFishka);
+    int getGamerY(int indexOnMapPosition, GameFishka gameFishka);
+
+    void putGamerToCell(int indexOnMapPosition, GameFishka gameFishka);
+    void getGamerFromCell(int indexOnMapPosition, GameFishka gameFishka);
 }

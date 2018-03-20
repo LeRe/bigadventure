@@ -29,6 +29,8 @@ public class Fishka extends Actor implements GameFishka {
         this.gameMap = gameMap;
         this.fishkaColor = fishkaColor;
 
+        gameMap.putGamerToCell(indexOnMapPosition, this);
+
         Pixmap pixmap = new Pixmap(FISHKA_WIDTH, FISHKA_HEIGHT, Pixmap.Format.RGBA8888 );
 
         switch (this.fishkaColor) {
@@ -57,31 +59,8 @@ public class Fishka extends Actor implements GameFishka {
     }
 
     private void setPositionOnScreen() {
-        int x = gameMap.getCenterCellX(indexOnMapPosition);
-        int y = gameMap.getCenterCellY(indexOnMapPosition);
-
-        x -= FISHKA_WIDTH / 2;
-        y -= FISHKA_HEIGHT / 2;
-
-        if (false) { //Пока все встают в центр клетки
-            switch (fishkaColor) {
-                case RED:
-                    x -= 200;
-                    break;
-                case GREEN:
-                    x -= 100;
-                    break;
-                case BLUE:
-
-                    break;
-                case YELLOW:
-                    x += 100;
-                    break;
-            }
-        }
-
-        setX(x);
-        setY(y);
+        setX(gameMap.getGamerX(indexOnMapPosition, this));
+        setY(gameMap.getGamerY(indexOnMapPosition, this));
     }
 
     public int getIndexOnMapPosition() {
@@ -101,12 +80,15 @@ public class Fishka extends Actor implements GameFishka {
 
     @Override
     public void setPosition(int position) {
+        gameMap.getGamerFromCell(indexOnMapPosition, this);
         if (position > gameMap.getMaxPositionIndex()) {
             indexOnMapPosition = 0;
         }
         else {
             indexOnMapPosition = position;
         }
+
+        gameMap.putGamerToCell(indexOnMapPosition, this);
 
         setPositionOnScreen();
     }
