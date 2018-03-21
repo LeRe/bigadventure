@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.ijava.bigadventure.ifaces.GameFishka;
+import ru.ijava.bigadventure.ifaces.ICell;
 
 /**
  * Created by levchenko on 14.03.2018.
  */
 
-public class Cell {
+public class Cell implements ICell {
 
     private int index;
     private int centerX;
@@ -33,7 +34,45 @@ public class Cell {
 
     }
 
-    public void putGamerToCell(GameFishka gameFishka) {
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    @Override
+    public int getCenterX() {
+        return centerX;
+    }
+
+    public void setCenterX(int centerX) {
+        this.centerX = centerX;
+    }
+
+    @Override
+    public int getCenterY() {
+        return centerY;
+    }
+
+    public void setCenterY(int centerY) {
+        this.centerY = centerY;
+    }
+
+
+    @Override
+    public boolean contains(GameFishka gameFishka) {
+        return fishkaList.contains(gameFishka);
+    }
+
+    @Override
+    public void remove(GameFishka gameFishka) {
+        fishkaList.remove(gameFishka);
+    }
+
+    @Override
+    public void put(GameFishka gameFishka) {
         int placeIndex;
 
         do {
@@ -44,13 +83,8 @@ public class Cell {
         fishkaList.add(placeIndex, gameFishka);
     }
 
-    public void getGamerFromCell(GameFishka gameFishka) {
-        if( fishkaList.contains(gameFishka) ) {
-            fishkaList.remove(gameFishka);
-        }
-    }
-
-    public int getGamerPlaceX(GameFishka gameFishka) {
+    @Override
+    public int getGamerX(GameFishka gameFishka) {
         int x = 0;
         if (fishkaList.contains(gameFishka)) {
             switch (fishkaList.indexOf(gameFishka)) {
@@ -67,13 +101,14 @@ public class Cell {
                     x = getCenterX() + cellWidth / 4;
                     break;
                 default:
-                  x = getCenterX();
+                    x = getCenterX();
             }
         }
         return x;
     }
 
-    public int getGamerPlaceY(GameFishka gameFishka) {
+    @Override
+    public int getGamerY(GameFishka gameFishka) {
         int y = 0;
         if (fishkaList.contains(gameFishka)) {
             switch (fishkaList.indexOf(gameFishka)) {
@@ -94,29 +129,5 @@ public class Cell {
             }
         }
         return y;
-    }
-
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
-    }
-
-    public int getCenterX() {
-        return centerX;
-    }
-
-    public void setCenterX(int centerX) {
-        this.centerX = centerX;
-    }
-
-    public int getCenterY() {
-        return centerY;
-    }
-
-    public void setCenterY(int centerY) {
-        this.centerY = centerY;
     }
 }

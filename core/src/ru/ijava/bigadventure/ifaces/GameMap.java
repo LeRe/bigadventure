@@ -17,9 +17,9 @@ public interface GameMap {
     int getCenterCellX(int indexOnMapPosition);
     int getCenterCellY(int indexOnMapPosition);
 
-    int getGamerX(int indexOnMapPosition, GameFishka gameFishka);
-    int getGamerY(int indexOnMapPosition, GameFishka gameFishka);
+    int getGamerX(GameFishka gameFishka);
+    int getGamerY(GameFishka gameFishka);
 
     void putGamerToCell(int indexOnMapPosition, GameFishka gameFishka);
-    void getGamerFromCell(int indexOnMapPosition, GameFishka gameFishka);
+    void moveGamer(int step, GameFishka gameFishka);
 }
