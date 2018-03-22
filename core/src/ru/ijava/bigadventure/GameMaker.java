@@ -21,7 +21,8 @@ public class GameMaker {
 
         int position = 0;
         for (GameFishka fishka: gamerList) {
-            fishka.setPosition(position);
+            //fishka.setPosition(position);
+            this.map.putGamerToCell(0, fishka);
             //position++;
         }
     }
@@ -32,7 +33,8 @@ public class GameMaker {
         frameCounter = 0;
 
         for (GameFishka fishka: gamerList) {
-            fishka.setPosition(fishka.getPosition() + 1);
+            //fishka.setPosition(fishka.getPosition() + 1);
+            map.moveGamer(1, fishka);
         }
     }
 }
