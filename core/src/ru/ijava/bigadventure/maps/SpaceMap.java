@@ -166,6 +166,7 @@ public class SpaceMap extends Actor implements GameMap {
         for (ICell cell: cellList) {
             if (cell.contains(gameFishka)) {
                 cell.remove(gameFishka);
+                break;
             }
         }
         cellList.get(indexOnMapPosition).put(gameFishka);

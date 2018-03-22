@@ -73,14 +73,15 @@ public class Cell implements ICell {
 
     @Override
     public void put(GameFishka gameFishka) {
-        int placeIndex;
+        //TODO bad algoritm, need remake...
+//        int placeIndex;
+//        do {
+//            placeIndex = (int) (Math.random() * numberGamers - 1);
+//        }
+//        while (fishkaList.get(placeIndex) != null);
+//        fishkaList.add(placeIndex, gameFishka);
 
-        do {
-            placeIndex = (int) (Math.random() * numberGamers - 1);
-        }
-        while (fishkaList.get(placeIndex) != null);
-
-        fishkaList.add(placeIndex, gameFishka);
+        fishkaList.add(gameFishka);
     }
 
     @Override

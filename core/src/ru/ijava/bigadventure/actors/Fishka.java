@@ -17,8 +17,8 @@ import ru.ijava.bigadventure.ifaces.GameMap;
 public class Fishka extends Actor implements GameFishka {
     private Texture texture;
 
-    private final int FISHKA_WIDTH = 290;
-    private final int FISHKA_HEIGHT = 180;
+    private final int FISHKA_WIDTH = 50;
+    private final int FISHKA_HEIGHT = 50;
 
     private int indexOnMapPosition;
     private GameMap gameMap;
@@ -48,7 +48,7 @@ public class Fishka extends Actor implements GameFishka {
                 break;
         }
         pixmap.fillCircle(FISHKA_WIDTH / 2,FISHKA_HEIGHT / 2, FISHKA_HEIGHT / 2);
-        pixmap.drawRectangle(0,0, FISHKA_WIDTH, FISHKA_HEIGHT);
+        //pixmap.drawRectangle(0,0, FISHKA_WIDTH, FISHKA_HEIGHT);
 
         texture = new Texture(pixmap);
 
