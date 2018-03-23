@@ -79,22 +79,7 @@ public class Fishka extends Actor implements GameFishka {
     }
 
     @Override
-    public void setPosition(int position) {
-        gameMap.putGamerToCell(indexOnMapPosition, this);
-        if (position > gameMap.getMaxPositionIndex()) {
-            indexOnMapPosition = 0;
-        }
-        else {
-            indexOnMapPosition = position;
-        }
-
-        gameMap.putGamerToCell(indexOnMapPosition, this);
-
+    public void setScreenPosition() {
         setPositionOnScreen();
-    }
-
-    @Override
-    public int getPosition() {
-        return indexOnMapPosition;
     }
 }

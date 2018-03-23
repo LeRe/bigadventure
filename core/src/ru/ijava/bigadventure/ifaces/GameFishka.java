@@ -5,6 +5,5 @@ package ru.ijava.bigadventure.ifaces;
  */
 
 public interface GameFishka {
-    void setPosition(int position);
-    int getPosition();
+    void setScreenPosition();
 }

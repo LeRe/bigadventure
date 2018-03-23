@@ -28,9 +28,9 @@ public class Cell implements ICell {
         this.centerY = centerY;
 
         fishkaList = new ArrayList<GameFishka>();
-        for (int i = 0; i < numberGamers; i++) {
-            fishkaList.add(null);
-        }
+        //for (int i = 0; i < numberGamers; i++) {
+        //    fishkaList.add(null);
+        //}
 
     }
 
@@ -82,6 +82,7 @@ public class Cell implements ICell {
 //        fishkaList.add(placeIndex, gameFishka);
 
         fishkaList.add(gameFishka);
+        gameFishka.setScreenPosition();
     }
 
     @Override
