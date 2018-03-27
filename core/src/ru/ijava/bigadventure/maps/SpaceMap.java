@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.ijava.bigadventure.ifaces.GameFishka;
+import ru.ijava.bigadventure.ifaces.IGamer;
 import ru.ijava.bigadventure.ifaces.GameMap;
 import ru.ijava.bigadventure.ifaces.ICell;
 
@@ -119,11 +119,6 @@ public class SpaceMap extends Actor implements GameMap {
     }
 
     @Override
-    public String getMapFileName() {
-        return fileName;
-    }
-
-    @Override
     public float getMapWidth() {
         return MAP_WIDTH;
     }
@@ -134,7 +129,7 @@ public class SpaceMap extends Actor implements GameMap {
     }
 
     @Override
-    public Actor getMapActor() {
+    public Actor getMapAsActor() {
         return (Actor) this;
     }
 
@@ -152,40 +147,30 @@ public class SpaceMap extends Actor implements GameMap {
     }
 
     @Override
-    public int getCenterCellX(int indexOnMapPosition) {
-        return cellList.get(indexOnMapPosition).getCenterX();
-    }
-
-    @Override
-    public int getCenterCellY(int indexOnMapPosition) {
-        return cellList.get(indexOnMapPosition).getCenterY();
-    }
-
-    @Override
-    public void putGamerToCell(int indexOnMapPosition, GameFishka gameFishka) {
+    public void putGamerToCell(int indexOnMapPosition, IGamer IGamer) {
         for (ICell cell: cellList) {
-            if (cell.contains(gameFishka)) {
-                cell.remove(gameFishka);
+            if (cell.contains(IGamer)) {
+                cell.remove(IGamer);
                 break;
             }
         }
-        cellList.get(indexOnMapPosition).put(gameFishka);
+        cellList.get(indexOnMapPosition).put(IGamer);
     }
 
     @Override
-    public int getGamerX(GameFishka gameFishka) {
-        return getCellContainingGamer(gameFishka).getGamerX(gameFishka);
+    public int getGamerX(IGamer IGamer) {
+        return getCellContainingGamer(IGamer).getGamerX(IGamer);
     }
 
     @Override
-    public int getGamerY(GameFishka gameFishka) {
-        return getCellContainingGamer(gameFishka).getGamerY(gameFishka);
+    public int getGamerY(IGamer IGamer) {
+        return getCellContainingGamer(IGamer).getGamerY(IGamer);
     }
 
-    private ICell getCellContainingGamer(GameFishka gameFishka) {
+    private ICell getCellContainingGamer(IGamer IGamer) {
         ICell cellContainingGamer = null;
         for (ICell cell: cellList) {
-            if (cell.contains(gameFishka)) {
+            if (cell.contains(IGamer)) {
                 cellContainingGamer = cell;
                 break;
             }
@@ -199,20 +184,20 @@ public class SpaceMap extends Actor implements GameMap {
     }
 
     @Override
-    public void moveGamer(int step, GameFishka gameFishka) {
-        int newPosition = getCurrentPosition(gameFishka) + step;
+    public void moveGamer(int step, IGamer IGamer) {
+        int newPosition = getCurrentPosition(IGamer) + step;
 
         if (newPosition > getMaxPositionIndex()) {
             newPosition = getMaxPositionIndex();
         }
 
-        putGamerToCell(newPosition, gameFishka);
+        putGamerToCell(newPosition, IGamer);
     }
 
-    private int getCurrentPosition(GameFishka gameFishka) {
+    private int getCurrentPosition(IGamer IGamer) {
         int position = -1;
         for (ICell cell: cellList) {
-            if (cell.contains(gameFishka)) {
+            if (cell.contains(IGamer)) {
                 position = cellList.indexOf(cell);
             }
         }

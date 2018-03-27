@@ -7,19 +7,15 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
  */
 
 public interface GameMap {
-    String getMapFileName();
     float getMapWidth();
     float getMapHeight();
-    Actor getMapActor();
+    Actor getMapAsActor();
 
     int getMaxPositionIndex();
 
-    int getCenterCellX(int indexOnMapPosition);
-    int getCenterCellY(int indexOnMapPosition);
+    int getGamerX(IGamer IGamer);
+    int getGamerY(IGamer IGamer);
 
-    int getGamerX(GameFishka gameFishka);
-    int getGamerY(GameFishka gameFishka);
-
-    void putGamerToCell(int indexOnMapPosition, GameFishka gameFishka);
-    void moveGamer(int step, GameFishka gameFishka);
+    void putGamerToCell(int indexOnMapPosition, IGamer IGamer);
+    void moveGamer(int step, IGamer IGamer);
 }

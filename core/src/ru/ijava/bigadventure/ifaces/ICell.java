@@ -5,13 +5,13 @@ package ru.ijava.bigadventure.ifaces;
  */
 
 public interface ICell {
-    boolean contains(GameFishka gameFishka);
-    void remove(GameFishka gameFishka);
-    void put(GameFishka gameFishka);
+    boolean contains(IGamer IGamer);
+    void remove(IGamer IGamer);
+    void put(IGamer IGamer);
 
     int getCenterX();
     int getCenterY();
 
-    int getGamerX(GameFishka gameFishka);
-    int getGamerY(GameFishka gameFishka);
+    int getGamerX(IGamer IGamer);
+    int getGamerY(IGamer IGamer);
 }

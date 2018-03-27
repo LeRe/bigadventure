@@ -4,15 +4,14 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FillViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
-import ru.ijava.bigadventure.ifaces.GestureWaiter;
+import ru.ijava.bigadventure.ifaces.GestureListener;
 
 /**
  * Created by rele on 3/9/18.
  */
 
-public class Board extends Stage implements GestureWaiter {
+public class Board extends Stage implements GestureListener {
 
     private final float MAP_WIDTH;
     private final float MAP_HEIGHT;

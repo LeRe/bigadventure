@@ -11,12 +11,12 @@ import com.badlogic.gdx.utils.viewport.FillViewport;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.ijava.bigadventure.actors.Fishka;
-import ru.ijava.bigadventure.actors.FishkaColor;
+import ru.ijava.bigadventure.actors.Gamer;
+import ru.ijava.bigadventure.actors.GamerColor;
 import ru.ijava.bigadventure.actors.GameDie;
 import ru.ijava.bigadventure.actors.Board;
-import ru.ijava.bigadventure.ifaces.GameFishka;
-import ru.ijava.bigadventure.ifaces.GestureWaiter;
+import ru.ijava.bigadventure.ifaces.IGamer;
+import ru.ijava.bigadventure.ifaces.GestureListener;
 import ru.ijava.bigadventure.ifaces.GameMap;
 import ru.ijava.bigadventure.maps.SpaceMap;
 
@@ -24,7 +24,7 @@ public class BigAdventureGdxGame extends ApplicationAdapter {
 	private Stage gameStage;
 	private Stage inputStage;
 
-	private GameMaker gameMaker;
+	private GameRound gameRound;
 
 	@Override
 	public void create () {
@@ -37,25 +37,25 @@ public class BigAdventureGdxGame extends ApplicationAdapter {
 
 		//Когда понадобиться два и более InputProcessor незабываем про InputMultiplexer
 		BigAdvGestureListener gestureListener = new BigAdvGestureListener();
-		gestureListener.addWaiter((GestureWaiter) gameStage);
+		gestureListener.addWaiter((GestureListener) gameStage);
 		Gdx.input.setInputProcessor(new GestureDetector(gestureListener));
 
-		gameStage.addActor(map.getMapActor());
+		gameStage.addActor(map.getMapAsActor());
 
-		List<GameFishka> gamerList = new ArrayList<GameFishka>();
-		gamerList.add((GameFishka) (new Fishka(FishkaColor.RED, map)));
-		gamerList.add((GameFishka) (new Fishka(FishkaColor.GREEN, map)));
-		gamerList.add((GameFishka) (new Fishka(FishkaColor.BLUE, map)));
-		gamerList.add((GameFishka) (new Fishka(FishkaColor.YELLOW, map)));
+		List<IGamer> gamerList = new ArrayList<IGamer>();
+		gamerList.add((IGamer) (new Gamer(GamerColor.RED, map)));
+		gamerList.add((IGamer) (new Gamer(GamerColor.GREEN, map)));
+		gamerList.add((IGamer) (new Gamer(GamerColor.BLUE, map)));
+		gamerList.add((IGamer) (new Gamer(GamerColor.YELLOW, map)));
 
-		for (GameFishka fishka: gamerList) {
+		for (IGamer fishka: gamerList) {
 			gameStage.addActor((Actor) fishka);
 		}
 
 		inputStage.addActor(die);
 		die.setVisible(true);
 
-		gameMaker = new GameMaker(map, gamerList);
+		gameRound = new GameRound(map, gamerList);
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class BigAdventureGdxGame extends ApplicationAdapter {
 	public void render () {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		gameMaker.act();
+		gameRound.act();
 
 		gameStage.act();
 		inputStage.act();

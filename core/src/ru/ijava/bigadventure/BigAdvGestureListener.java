@@ -6,27 +6,27 @@ import com.badlogic.gdx.math.Vector2;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.ijava.bigadventure.ifaces.GestureWaiter;
+import ru.ijava.bigadventure.ifaces.GestureListener;
 
 /**
  * Created by rele on 2/26/18.
  */
 
 public class BigAdvGestureListener implements GestureDetector.GestureListener {
-    private List<GestureWaiter> gestureWaiters;
+    private List<GestureListener> gestureListeners;
 
 
     public BigAdvGestureListener() {
-        gestureWaiters = new ArrayList<GestureWaiter>();
+        gestureListeners = new ArrayList<GestureListener>();
     }
 
-    public void addWaiter(GestureWaiter gestureWaiter) {
-        gestureWaiters.add(gestureWaiter);
+    public void addWaiter(GestureListener gestureListener) {
+        gestureListeners.add(gestureListener);
     }
 
-    public void removeWaiter(GestureWaiter gestureWaiter) {
-        if (gestureWaiters.contains(gestureWaiter)) {
-            gestureWaiters.remove(gestureWaiter);
+    public void removeWaiter(GestureListener gestureListener) {
+        if (gestureListeners.contains(gestureListener)) {
+            gestureListeners.remove(gestureListener);
         }
     }
 
@@ -52,10 +52,10 @@ public class BigAdvGestureListener implements GestureDetector.GestureListener {
 
     @Override
     public boolean pan(float x, float y, float deltaX, float deltaY) {
-        if (gestureWaiters.size() == 0) {
+        if (gestureListeners.size() == 0) {
             return false;
         }
-        for (GestureWaiter waiter: gestureWaiters) {
+        for (GestureListener waiter: gestureListeners) {
             waiter.translate(deltaX,deltaY);
 
         }
@@ -69,10 +69,10 @@ public class BigAdvGestureListener implements GestureDetector.GestureListener {
 
     @Override
     public boolean zoom(float initialDistance, float distance) {
-        if (gestureWaiters.size() == 0) {
+        if (gestureListeners.size() == 0) {
             return false;
         }
-        for (GestureWaiter waiter: gestureWaiters) {
+        for (GestureListener waiter: gestureListeners) {
             waiter.zoom(initialDistance, distance);
         }
         return true;

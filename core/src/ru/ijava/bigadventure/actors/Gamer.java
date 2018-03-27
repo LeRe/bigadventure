@@ -4,36 +4,35 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-import ru.ijava.bigadventure.ifaces.GameFishka;
+import ru.ijava.bigadventure.ifaces.IGamer;
 import ru.ijava.bigadventure.ifaces.GameMap;
 
 /**
  * Created by rele on 3/5/18.
  */
 
-public class Fishka extends Actor implements GameFishka {
+public class Gamer extends Actor implements IGamer {
     private Texture texture;
 
-    private final int FISHKA_WIDTH = 50;
-    private final int FISHKA_HEIGHT = 50;
+    private final int GAMER_WIDTH = 50;
+    private final int GAMER_HEIGHT = 50;
 
     private int indexOnMapPosition;
     private GameMap gameMap;
-    private FishkaColor fishkaColor;
+    private GamerColor gamerColor;
 
-    public Fishka (FishkaColor fishkaColor, GameMap gameMap) {
+    public Gamer(GamerColor gamerColor, GameMap gameMap) {
         indexOnMapPosition = 0;
         this.gameMap = gameMap;
-        this.fishkaColor = fishkaColor;
+        this.gamerColor = gamerColor;
 
         gameMap.putGamerToCell(indexOnMapPosition, this);
 
-        Pixmap pixmap = new Pixmap(FISHKA_WIDTH, FISHKA_HEIGHT, Pixmap.Format.RGBA8888 );
+        Pixmap pixmap = new Pixmap(GAMER_WIDTH, GAMER_HEIGHT, Pixmap.Format.RGBA8888 );
 
-        switch (this.fishkaColor) {
+        switch (this.gamerColor) {
             case RED :
                 pixmap.setColor(1,0,0,1);
                 break;
@@ -47,28 +46,14 @@ public class Fishka extends Actor implements GameFishka {
                 pixmap.setColor(1,1,0,1);
                 break;
         }
-        pixmap.fillCircle(FISHKA_WIDTH / 2,FISHKA_HEIGHT / 2, FISHKA_HEIGHT / 2);
-        //pixmap.drawRectangle(0,0, FISHKA_WIDTH, FISHKA_HEIGHT);
+        pixmap.fillCircle(GAMER_WIDTH / 2, GAMER_HEIGHT / 2, GAMER_HEIGHT / 2);
 
         texture = new Texture(pixmap);
 
-        setWidth(FISHKA_WIDTH);
-        setHeight(FISHKA_HEIGHT);
+        setWidth(GAMER_WIDTH);
+        setHeight(GAMER_HEIGHT);
 
-        setPositionOnScreen();
-    }
-
-    private void setPositionOnScreen() {
-        setX(gameMap.getGamerX(this));
-        setY(gameMap.getGamerY(this));
-    }
-
-    public int getIndexOnMapPosition() {
-        return indexOnMapPosition;
-    }
-
-    public void setIndexOnMapPosition(int indexOnMapPosition) {
-        this.indexOnMapPosition = indexOnMapPosition;
+        setScreenPosition();
     }
 
     @Override
@@ -80,6 +65,7 @@ public class Fishka extends Actor implements GameFishka {
 
     @Override
     public void setScreenPosition() {
-        setPositionOnScreen();
+        setX(gameMap.getGamerX(this));
+        setY(gameMap.getGamerY(this));
     }
 }

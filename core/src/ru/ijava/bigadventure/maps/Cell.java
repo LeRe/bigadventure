@@ -3,7 +3,7 @@ package ru.ijava.bigadventure.maps;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.ijava.bigadventure.ifaces.GameFishka;
+import ru.ijava.bigadventure.ifaces.IGamer;
 import ru.ijava.bigadventure.ifaces.ICell;
 
 /**
@@ -11,35 +11,25 @@ import ru.ijava.bigadventure.ifaces.ICell;
  */
 
 public class Cell implements ICell {
-
     private int index;
     private int centerX;
     private int centerY;
     private CellForm cellForm;
     private int cellWidth;
     private int cellHeight;
-    private int numberGamers = 4;
 
-    List<GameFishka> fishkaList;
+    List<IGamer> gamersList;
 
     public Cell(int index, int centerX, int centerY, CellForm cellForm, int cellWidth, int cellHeight) {
         this.index = index;
         this.centerX = centerX;
         this.centerY = centerY;
 
-        fishkaList = new ArrayList<GameFishka>();
-        //for (int i = 0; i < numberGamers; i++) {
-        //    fishkaList.add(null);
-        //}
+        this.cellForm = cellForm;
+        this.cellWidth = cellWidth;
+        this.cellHeight = cellHeight;
 
-    }
-
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
+        gamersList = new ArrayList<IGamer>();
     }
 
     @Override
@@ -47,49 +37,40 @@ public class Cell implements ICell {
         return centerX;
     }
 
-    public void setCenterX(int centerX) {
-        this.centerX = centerX;
-    }
-
     @Override
     public int getCenterY() {
         return centerY;
     }
 
-    public void setCenterY(int centerY) {
-        this.centerY = centerY;
-    }
-
-
     @Override
-    public boolean contains(GameFishka gameFishka) {
-        return fishkaList.contains(gameFishka);
+    public boolean contains(IGamer IGamer) {
+        return gamersList.contains(IGamer);
     }
 
     @Override
-    public void remove(GameFishka gameFishka) {
-        fishkaList.remove(gameFishka);
+    public void remove(IGamer IGamer) {
+        gamersList.remove(IGamer);
     }
 
     @Override
-    public void put(GameFishka gameFishka) {
+    public void put(IGamer IGamer) {
         //TODO bad algoritm, need remake...
 //        int placeIndex;
 //        do {
 //            placeIndex = (int) (Math.random() * numberGamers - 1);
 //        }
-//        while (fishkaList.get(placeIndex) != null);
-//        fishkaList.add(placeIndex, gameFishka);
+//        while (gamersList.get(placeIndex) != null);
+//        gamersList.add(placeIndex, IGamer);
 
-        fishkaList.add(gameFishka);
-        gameFishka.setScreenPosition();
+        gamersList.add(IGamer);
+        IGamer.setScreenPosition();
     }
 
     @Override
-    public int getGamerX(GameFishka gameFishka) {
+    public int getGamerX(IGamer IGamer) {
         int x = 0;
-        if (fishkaList.contains(gameFishka)) {
-            switch (fishkaList.indexOf(gameFishka)) {
+        if (gamersList.contains(IGamer)) {
+            switch (gamersList.indexOf(IGamer)) {
                 case 0:
                     x = getCenterX() - cellWidth / 4;
                     break;
@@ -110,10 +91,10 @@ public class Cell implements ICell {
     }
 
     @Override
-    public int getGamerY(GameFishka gameFishka) {
+    public int getGamerY(IGamer IGamer) {
         int y = 0;
-        if (fishkaList.contains(gameFishka)) {
-            switch (fishkaList.indexOf(gameFishka)) {
+        if (gamersList.contains(IGamer)) {
+            switch (gamersList.indexOf(IGamer)) {
                 case 0:
                     y = getCenterY() - cellHeight / 4;
                     break;
