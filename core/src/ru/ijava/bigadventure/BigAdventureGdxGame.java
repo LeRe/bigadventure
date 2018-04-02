@@ -21,46 +21,49 @@ import ru.ijava.bigadventure.ifaces.GameMap;
 import ru.ijava.bigadventure.maps.SpaceMap;
 
 public class BigAdventureGdxGame extends ApplicationAdapter {
-	private Stage gameStage;
+	private Stage gameBoard;
 	private Stage inputStage;
 
-	private GameRound gameRound;
+	//private GameRound gameRound;   TODO remove
 
 	@Override
 	public void create () {
 		GameMap map = new SpaceMap();
-
 		GameDie die = new GameDie();
 
-		gameStage = new Board(map.getMapWidth(), map.getMapHeight());
+		gameBoard = new Board(map);
 		inputStage = new Stage(new FillViewport(die.getViewportSize(), die.getViewportSize()));
 
 		//Когда понадобиться два и более InputProcessor незабываем про InputMultiplexer
 		BigAdvGestureListener gestureListener = new BigAdvGestureListener();
-		gestureListener.addWaiter((GestureListener) gameStage);
+		gestureListener.addWaiter((GestureListener) gameBoard);
 		Gdx.input.setInputProcessor(new GestureDetector(gestureListener));
 
-		gameStage.addActor(map.getMapAsActor());
+		gameBoard.addActor(map.getMapAsActor());
+		gameBoard.addActor(new Gamer(GamerColor.RED, map));
+		gameBoard.addActor(new Gamer(GamerColor.GREEN, map));
+		gameBoard.addActor(new Gamer(GamerColor.BLUE, map));
+		gameBoard.addActor(new Gamer(GamerColor.YELLOW, map));
 
-		List<IGamer> gamerList = new ArrayList<IGamer>();
-		gamerList.add((IGamer) (new Gamer(GamerColor.RED, map)));
-		gamerList.add((IGamer) (new Gamer(GamerColor.GREEN, map)));
-		gamerList.add((IGamer) (new Gamer(GamerColor.BLUE, map)));
-		gamerList.add((IGamer) (new Gamer(GamerColor.YELLOW, map)));
+//		List<IGamer> gamerList = new ArrayList<IGamer>();    TODO remove
+//		gamerList.add((IGamer) (new Gamer(GamerColor.RED, map)));
+//		gamerList.add((IGamer) (new Gamer(GamerColor.GREEN, map)));
+//		gamerList.add((IGamer) (new Gamer(GamerColor.BLUE, map)));
+//		gamerList.add((IGamer) (new Gamer(GamerColor.YELLOW, map)));
 
-		for (IGamer fishka: gamerList) {
-			gameStage.addActor((Actor) fishka);
-		}
+//		for (IGamer fishka: gamerList) {    TODO remove
+//			gameBoard.addActor((Actor) fishka);
+//		}
 
 		inputStage.addActor(die);
 		die.setVisible(true);
 
-		gameRound = new GameRound(map, gamerList);
+//		gameRound = new GameRound(map, gamerList);  TODO remove
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		gameStage.getViewport().update(width, height, true);
+		gameBoard.getViewport().update(width, height, true);
 		inputStage.getViewport().update(width, height, true);
 	}
 
@@ -68,13 +71,13 @@ public class BigAdventureGdxGame extends ApplicationAdapter {
 	public void render () {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		gameRound.act();
+//		gameRound.act(); TODO remove
 
-		gameStage.act();
+		gameBoard.act();
 		inputStage.act();
 
-		gameStage.getViewport().apply();
-		gameStage.draw();
+		gameBoard.getViewport().apply();
+		gameBoard.draw();
 
 		inputStage.getViewport().apply();
 		inputStage.draw();
@@ -83,7 +86,7 @@ public class BigAdventureGdxGame extends ApplicationAdapter {
 	
 	@Override
 	public void dispose () {
-		gameStage.dispose();
+		gameBoard.dispose();
 		inputStage.dispose();
 	}
 }
