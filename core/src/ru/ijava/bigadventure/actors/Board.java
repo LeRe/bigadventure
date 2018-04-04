@@ -2,6 +2,7 @@ package ru.ijava.bigadventure.actors;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 
@@ -18,12 +19,17 @@ import ru.ijava.bigadventure.ifaces.IGamer;
 
 public class Board extends Stage implements GestureListener {
 
-    private final float MAP_WIDTH;
-    private final float MAP_HEIGHT;
-    private final float MAP_DIAGONAL;
+    private float MAP_WIDTH;
+    private float MAP_HEIGHT;
+    private float MAP_DIAGONAL;
 
     private static final float MIN_ZOOM = 0.2f;
     private static final float MAX_ZOOM = 1.5f;
+
+    private List<IGamer> gamerList = new ArrayList<IGamer>();
+    private List<IGamer> waitingMoveList = new ArrayList<IGamer>();
+    private GameMap gameMap;
+    private int frameCounter = 0;
 
     public Board(GameMap gameMap) {
         super(new FillViewport(gameMap.getMapWidth(), gameMap.getMapHeight()));
@@ -31,6 +37,8 @@ public class Board extends Stage implements GestureListener {
         MAP_WIDTH = gameMap.getMapWidth();
         MAP_HEIGHT = gameMap.getMapHeight();
         MAP_DIAGONAL = (float) Math.sqrt(MAP_WIDTH * MAP_WIDTH + MAP_HEIGHT * MAP_HEIGHT);
+
+        this.gameMap = gameMap;
     }
 
     @Override
@@ -60,8 +68,14 @@ public class Board extends Stage implements GestureListener {
         camera.translate(deltaX, deltaY, 0);
     }
 
+    @Override
+    public void addActor(Actor actor) {
+        super.addActor(actor);
 
-
+        if(actor instanceof IGamer) {
+            gamerList.add((IGamer) actor);
+        }
+    }
 
     @Override
     public void act() {
@@ -69,11 +83,12 @@ public class Board extends Stage implements GestureListener {
         if (frameCounter < 30) return;
         frameCounter = 0;
 
+        //TODO Move Actors fuctional from SpaceMap to Board
+        //TODO Board will implements GameMap interface and proxing request to SpaceMap...
+
         //Let's check if any player is making a move now, break if so
 
-
         //check to see if any player is in the final cell, if it is so - the game is over
-
 
         //if the waitingMoveList is empty fill it
         //
@@ -82,29 +97,18 @@ public class Board extends Stage implements GestureListener {
         // this gamer throw gamedie and make steps
 
 
+//
+//        int position = 0;
+//        for (IGamer gamer: gamerList) {
+//            this.gameMap.putGamerToCell(position, gamer);
+//        }
+//
+//        fillWaitingMoveList();
 
 
         for (IGamer fishka: gamerList) {
-            map.moveGamer(2, fishka);
+            gameMap.moveGamer(2, fishka);
         }
-    }
-
-    private List<IGamer> gamerList;
-    private List<IGamer> waitingMoveList = new ArrayList<IGamer>();
-    private GameMap map;
-
-    private int frameCounter = 0;
-
-    public GameRound(GameMap map, List<IGamer> gamerList) {
-        this.map = map;
-        this.gamerList = gamerList;
-
-        int position = 0;
-        for (IGamer gamer: gamerList) {
-            this.map.putGamerToCell(position, gamer);
-        }
-
-        fillWaitingMoveList();
     }
 
     private void fillWaitingMoveList() {
@@ -112,7 +116,4 @@ public class Board extends Stage implements GestureListener {
             waitingMoveList.add(gamer);
         }
     }
-
-
-
 }
