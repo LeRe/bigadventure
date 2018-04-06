@@ -4,18 +4,12 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.input.GestureDetector;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FillViewport;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import ru.ijava.bigadventure.actors.Gamer;
 import ru.ijava.bigadventure.actors.GamerColor;
 import ru.ijava.bigadventure.actors.GameDie;
 import ru.ijava.bigadventure.actors.Board;
-import ru.ijava.bigadventure.ifaces.IGamer;
 import ru.ijava.bigadventure.ifaces.GestureListener;
 import ru.ijava.bigadventure.ifaces.GameMap;
 import ru.ijava.bigadventure.maps.SpaceMap;
@@ -23,8 +17,6 @@ import ru.ijava.bigadventure.maps.SpaceMap;
 public class BigAdventureGdxGame extends ApplicationAdapter {
 	private Stage gameBoard;
 	private Stage inputStage;
-
-	//private GameRound gameRound;   TODO remove
 
 	@Override
 	public void create () {
@@ -45,20 +37,8 @@ public class BigAdventureGdxGame extends ApplicationAdapter {
 		gameBoard.addActor(new Gamer(GamerColor.BLUE, map));
 		gameBoard.addActor(new Gamer(GamerColor.YELLOW, map));
 
-//		List<IGamer> gamerList = new ArrayList<IGamer>();    TODO remove
-//		gamerList.add((IGamer) (new Gamer(GamerColor.RED, map)));
-//		gamerList.add((IGamer) (new Gamer(GamerColor.GREEN, map)));
-//		gamerList.add((IGamer) (new Gamer(GamerColor.BLUE, map)));
-//		gamerList.add((IGamer) (new Gamer(GamerColor.YELLOW, map)));
-
-//		for (IGamer fishka: gamerList) {    TODO remove
-//			gameBoard.addActor((Actor) fishka);
-//		}
-
 		inputStage.addActor(die);
 		die.setVisible(true);
-
-//		gameRound = new GameRound(map, gamerList);  TODO remove
 	}
 
 	@Override
@@ -70,8 +50,6 @@ public class BigAdventureGdxGame extends ApplicationAdapter {
 	@Override
 	public void render () {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-//		gameRound.act(); TODO remove
 
 		gameBoard.act();
 		inputStage.act();

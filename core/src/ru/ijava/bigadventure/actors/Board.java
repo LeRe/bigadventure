@@ -83,9 +83,6 @@ public class Board extends Stage implements GestureListener {
         if (frameCounter < 30) return;
         frameCounter = 0;
 
-        //TODO Move Actors fuctional from SpaceMap to Board
-        //TODO Board will implements GameMap interface and proxing request to SpaceMap...
-
         //Let's check if any player is making a move now, break if so
 
         //check to see if any player is in the final cell, if it is so - the game is over
@@ -95,16 +92,6 @@ public class Board extends Stage implements GestureListener {
         //get next gamer from waiting list (remove)
         //
         // this gamer throw gamedie and make steps
-
-
-//
-//        int position = 0;
-//        for (IGamer gamer: gamerList) {
-//            this.gameMap.putGamerToCell(position, gamer);
-//        }
-//
-//        fillWaitingMoveList();
-
 
         for (IGamer fishka: gamerList) {
             gameMap.moveGamer(2, fishka);
