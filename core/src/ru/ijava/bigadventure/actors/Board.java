@@ -29,6 +29,7 @@ public class Board extends Stage implements GestureListener {
     private List<IGamer> gamerList = new ArrayList<IGamer>();
     private List<IGamer> waitingMoveList = new ArrayList<IGamer>();
     private GameMap gameMap;
+    private final int START_POSITION = 0;
     private int frameCounter = 0;
 
     public Board(GameMap gameMap) {
@@ -74,6 +75,7 @@ public class Board extends Stage implements GestureListener {
 
         if(actor instanceof IGamer) {
             gamerList.add((IGamer) actor);
+            gameMap.putGamerToCell(START_POSITION, (IGamer) actor);
         }
     }
 

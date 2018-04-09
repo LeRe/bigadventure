@@ -5,5 +5,6 @@ package ru.ijava.bigadventure.ifaces;
  */
 
 public interface IGamer {
-    void setScreenPosition();
+    //void setScreenPosition();
+    void setScreenPosition(float x, float y);
 }

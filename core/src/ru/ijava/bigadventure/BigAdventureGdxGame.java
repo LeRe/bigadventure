@@ -32,10 +32,10 @@ public class BigAdventureGdxGame extends ApplicationAdapter {
 		Gdx.input.setInputProcessor(new GestureDetector(gestureListener));
 
 		gameBoard.addActor(map.getMapAsActor());
-		gameBoard.addActor(new Gamer(GamerColor.RED, map));
-		gameBoard.addActor(new Gamer(GamerColor.GREEN, map));
-		gameBoard.addActor(new Gamer(GamerColor.BLUE, map));
-		gameBoard.addActor(new Gamer(GamerColor.YELLOW, map));
+		gameBoard.addActor(new Gamer(GamerColor.RED));
+		gameBoard.addActor(new Gamer(GamerColor.GREEN));
+		gameBoard.addActor(new Gamer(GamerColor.BLUE));
+		gameBoard.addActor(new Gamer(GamerColor.YELLOW));
 
 		inputStage.addActor(die);
 		die.setVisible(true);

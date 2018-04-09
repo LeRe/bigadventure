@@ -53,17 +53,17 @@ public class Cell implements ICell {
     }
 
     @Override
-    public void put(IGamer IGamer) {
+    public void put(IGamer iGamer) {
         //TODO bad algoritm, need remake...
 //        int placeIndex;
 //        do {
 //            placeIndex = (int) (Math.random() * numberGamers - 1);
 //        }
 //        while (gamersList.get(placeIndex) != null);
-//        gamersList.add(placeIndex, IGamer);
+//        gamersList.add(placeIndex, iGamer);
 
-        gamersList.add(IGamer);
-        IGamer.setScreenPosition();
+        gamersList.add(iGamer);
+        iGamer.setScreenPosition(getGamerX(iGamer), getGamerY(iGamer));
     }
 
     @Override

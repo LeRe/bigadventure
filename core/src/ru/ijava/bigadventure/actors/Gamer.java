@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import ru.ijava.bigadventure.ifaces.IGamer;
-import ru.ijava.bigadventure.ifaces.GameMap;
 
 /**
  * Created by rele on 3/5/18.
@@ -19,16 +18,10 @@ public class Gamer extends Actor implements IGamer {
     private final int GAMER_WIDTH = 50;
     private final int GAMER_HEIGHT = 50;
 
-    private int indexOnMapPosition;
-    private GameMap gameMap;
     private GamerColor gamerColor;
 
-    public Gamer(GamerColor gamerColor, GameMap gameMap) {
-        indexOnMapPosition = 0;
-        this.gameMap = gameMap;
+    public Gamer(GamerColor gamerColor) {
         this.gamerColor = gamerColor;
-
-        gameMap.putGamerToCell(indexOnMapPosition, this);
 
         Pixmap pixmap = new Pixmap(GAMER_WIDTH, GAMER_HEIGHT, Pixmap.Format.RGBA8888 );
 
@@ -52,8 +45,6 @@ public class Gamer extends Actor implements IGamer {
 
         setWidth(GAMER_WIDTH);
         setHeight(GAMER_HEIGHT);
-
-        setScreenPosition();
     }
 
     @Override
@@ -64,8 +55,8 @@ public class Gamer extends Actor implements IGamer {
     }
 
     @Override
-    public void setScreenPosition() {
-        setX(gameMap.getGamerX(this));
-        setY(gameMap.getGamerY(this));
+    public void setScreenPosition(float x, float y) {
+        setX(x);
+        setY(y);
     }
 }
